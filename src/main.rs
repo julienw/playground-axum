@@ -1,14 +1,15 @@
 mod db;
-mod entities;
 mod handlers;
 
 use axum::{Router, routing::get};
 use db::connect;
+use migration::{Migrator, MigratorTrait};
 use sea_orm::DatabaseConnection;
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
     let db: DatabaseConnection = connect().await;
+    Migrator::up(&db, None).await?;
     let app = Router::new().route(
         "/",
         get({

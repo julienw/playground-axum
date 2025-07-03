@@ -1,4 +1,4 @@
-use crate::entities::user;
+use entities::user;
 use askama::Template;
 use axum::response::{Html, IntoResponse};
 use sea_orm::{DatabaseConnection, EntityTrait};
